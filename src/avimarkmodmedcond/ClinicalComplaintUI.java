@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -103,6 +102,38 @@ public class ClinicalComplaintUI implements ActionListener{
                 }
             }
         }
+        
+        return result.toString();
+    }
+    
+       public String toString(){
+        StringBuilder result = new StringBuilder();
+        result.append(this.clinicalComplaintNameJLabel.getText());
+        result.append("\n");
+        for(Component c1 : this.questionsJPanel.getComponents()){
+            if (c1 instanceof QuestionJPanel){
+                QuestionJPanel j = (QuestionJPanel) c1;
+                String category = j.question.getCategory();
+                String answer = "";
+                String question = "";
+                for(Component c2 : j.getComponents()){
+                    if (c2 instanceof JTextField){
+                        if(!((JTextField) c2).getText().isEmpty()){
+                            answer = ((JTextField) c2).getText();
+                        }
+                    }
+                     if (c2 instanceof JLabel){
+                        if(!((JLabel) c2).getText().isEmpty()){
+                            question =((JLabel) c2).getText();
+                        }
+                    }
+                }
+                String temp = category + ": " + question + " " + answer + "\n";
+                result.append(temp);
+                
+            }
+        }
+        
         return result.toString();
     }
 }

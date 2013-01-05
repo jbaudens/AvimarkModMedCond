@@ -16,7 +16,6 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -97,7 +96,7 @@ public class ClinicalComplaintsJPanel  extends JPanel implements ActionListener,
      */
     public void textToClipboard(){
        StringBuilder result = new StringBuilder();
-       HashSet<String> setOfCategories = new HashSet<>();
+       /*HashSet<String> setOfCategories = new HashSet<>();
        for (ClinicalComplaintUI ccui : listOfClinicalComplaintUIs){
            for (Question q : ccui.getClinicalComplaint().getListOfQuestions()){
                setOfCategories.add(q.getCategory());
@@ -109,7 +108,13 @@ public class ClinicalComplaintsJPanel  extends JPanel implements ActionListener,
             for (ClinicalComplaintUI ccui : listOfClinicalComplaintUIs){
                 result.append(ccui.toString(s));
             }
-       }
+       }*/
+       
+       for (ClinicalComplaintUI ccui : listOfClinicalComplaintUIs){
+           result.append(ccui.toString());
+       }           
+       
+       
        setClipboardContents(result.toString());
    }
    
