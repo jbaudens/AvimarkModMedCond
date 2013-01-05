@@ -128,12 +128,12 @@ public class ClinicalComplaintUI implements ActionListener{
                         }
                     }
                 }
-                String temp = category + ": " + question + " " + answer + "\n";
+                String temp = "\t" + category + ": " + question + " " + answer + "\n";
                 result.append(temp);
                 
             }
         }
-        
+        result.append("\n");
         return result.toString();
     }
 }
