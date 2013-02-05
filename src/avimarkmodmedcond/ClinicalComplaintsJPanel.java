@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -52,29 +53,42 @@ public class ClinicalComplaintsJPanel  extends JPanel implements ActionListener,
         c.fill = GridBagConstraints.BOTH;
         c.weighty = 1.0;
         c.weightx = 0.0;
-        c.gridx = 0; c.gridy = 0; 
+        c.gridx = 2; c.gridy = 0; 
         newPatientJButton = new JButton("New Patient");
         newPatientJButton.addActionListener(this);
         add(newPatientJButton,c);
         listOfClinicalComplaintUIs = new ArrayList<>();
         int row = 1;
+        int count = 1;
         for (ClinicalComplaint cc : this.clinicalComplaints.getListOfClinicalComplaints()){
             ClinicalComplaintUI clinicalComplaint = new ClinicalComplaintUI(cc);
+            int column;
+            if(count%2 != 0){
+                column = 0;
+                row++;
+                //Add spacer
+                c.gridx = column+2;
+                add(Box.createHorizontalStrut( 100),c);
+            }
+            else{
+                column = 3;
+            }
             listOfClinicalComplaintUIs.add(clinicalComplaint);
             c.gridy = row;
-            c.gridx = 0;
+            c.gridx = column;
             c.insets = new Insets(0, 10, 0, 0);
             c.weightx = 0.0;
             add(clinicalComplaint.getClinicalComplaintNameJLabel(),c);
-            row++;
-            c.gridx = 1;
-            c.weightx = 0.0;
+            
+            c.gridx = column+1;
             add(clinicalComplaint.getAskQuestionsJButton(),c);
+            
+            count++;
         }
         toClipboardJButton = new JButton("To Clipboard");
         toClipboardJButton.addActionListener(this);
 
-        c.gridx = 0;
+        c.gridx = 2;
         c.gridy++;
         c.weightx = 0.0;
         

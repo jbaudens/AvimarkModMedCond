@@ -110,6 +110,7 @@ public class ClinicalComplaintUI implements ActionListener{
         StringBuilder result = new StringBuilder();
         result.append(this.clinicalComplaintNameJLabel.getText());
         result.append("\n");
+        boolean atLeastOneQuestionIsAnswered = false;
         for(Component c1 : this.questionsJPanel.getComponents()){
             if (c1 instanceof QuestionJPanel){
                 QuestionJPanel j = (QuestionJPanel) c1;
@@ -128,12 +129,20 @@ public class ClinicalComplaintUI implements ActionListener{
                         }
                     }
                 }
-                String temp = "\t" + category + ": " + question + " " + answer + "\n";
-                result.append(temp);
+                if(!answer.isEmpty()){
+                    atLeastOneQuestionIsAnswered = true;
+                    String temp = "   " + category + ": " + answer + "\n";
+                    result.append(temp);
+                }
                 
             }
         }
         result.append("\n");
-        return result.toString();
+        if (atLeastOneQuestionIsAnswered){
+            return result.toString();
+        }
+        else{
+            return "";
+        }
     }
 }
